@@ -1,5 +1,5 @@
 import { INSTAGRAM_URL, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../config/videos';
-import { MessageCircleIcon } from './icons';
+import { WhatsAppIcon } from './icons';
 
 function Svg({ size, children, viewBox = "0 0 24 24" }) {
   return <svg width={size} height={size} viewBox={viewBox} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{children}</svg>;
@@ -10,7 +10,7 @@ export default function Footer() {
   const nav = (href) => { const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth' }); };
   const socialLinks = [
     { icon: <Svg size={16}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></Svg>, href: INSTAGRAM_URL, label: 'Instagram' },
-    { icon: <span className="text-blue-400"><MessageCircleIcon size={16} /></span>, href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, label: 'WhatsApp' },
+    { icon: <WhatsAppIcon size={16} />, href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, label: 'WhatsApp' },
   ];
   const navLinks = [
     { label: 'Metodologia', href: '#beneficios' },

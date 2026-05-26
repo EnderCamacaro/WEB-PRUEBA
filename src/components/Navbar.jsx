@@ -38,6 +38,8 @@ export default function Navbar() {
 
   const nav = (href) => {
     setOpen(false);
+    const link = links.find(l => l.href === href);
+    if (link) setActive(link.label);
     const el = document.querySelector(href);
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY - 80;
