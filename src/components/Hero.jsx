@@ -156,11 +156,11 @@ export default function Hero() {
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             <h1 className="section-title text-white leading-tight mt-5">
-              Habla inglés con <span className="gradient-text neon-glow-text">confianza real</span><br />
+              Habla inglés con <span className="gradient-text neon-glow-text">confianza real</span><br className="sm:block hidden" />
               en <span className="gradient-text-gold">90 días</span>, garantizado.
             </h1>
             <p className="section-subtitle mt-5 max-w-xl">
-              Método intensivo y personalizado de Omar Benvenuto. Sin memorizar reglas aburridas — habla desde el primer día y transforma tu carrera, tus viajes y tu vida.
+              Olvida las reglas. Habla desde el día uno y transforma tu vida.
             </p>
           </motion.div>
 
