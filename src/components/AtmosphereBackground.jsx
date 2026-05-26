@@ -12,9 +12,9 @@ const texts = [
 ];
 
 const depthCfg = [
-  { blur: '0px', speed: 1, opacity: '0.25', tailOff: 20 },
-  { blur: '2px', speed: 0.65, opacity: '0.16', tailOff: 14 },
-  { blur: '4px', speed: 0.4, opacity: '0.1', tailOff: 10 },
+  { blur: '0px', speed: 1, opacity: '0.5', tailOff: 20 },
+  { blur: '2px', speed: 0.65, opacity: '0.35', tailOff: 14 },
+  { blur: '4px', speed: 0.4, opacity: '0.2', tailOff: 10 },
 ];
 
 function IconHeart({ size }) {
@@ -81,25 +81,30 @@ export default function AtmosphereBackground() {
       <style>{`
         .bubble {
           position: absolute;
-          border-radius: 10px;
-          border: 1px solid rgba(59,130,246,0.08);
-          background: rgba(59,130,246,0.025);
+          border-radius: 12px;
+          border: 1px solid rgba(59,130,246,0.15);
+          background: rgba(15,23,42,0.3);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
           white-space: nowrap;
           font-weight: 500;
           letter-spacing: 0.02em;
-          color: rgba(147,197,253,0.85);
+          color: rgba(147,197,253,0.9);
           pointer-events: none;
         }
         .tail {
           position: absolute;
-          bottom: -5px;
-          width: 8px;
-          height: 8px;
-          border-right: 1px solid rgba(59,130,246,0.08);
-          border-bottom: 1px solid rgba(59,130,246,0.08);
-          background: rgba(59,130,246,0.025);
+          bottom: -6px;
+          width: 10px;
+          height: 10px;
+          border-right: 1px solid rgba(59,130,246,0.15);
+          border-bottom: 1px solid rgba(59,130,246,0.15);
+          background: rgba(15,23,42,0.3);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
           transform: rotate(45deg);
-          border-radius: 0 0 2px 0;
+          border-radius: 0 0 3px 0;
         }
         @keyframes rise {
           0% { transform: translateY(0) translateX(0); }
