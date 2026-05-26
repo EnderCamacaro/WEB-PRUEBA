@@ -18,9 +18,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - id: pages
-        uses: actions/configure-pages@v4
-      - run: npm run build -- --base=${{ steps.pages.outputs.base_path }}/
+      - run: npm run build -- --base=/WEB-PRUEBA/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
