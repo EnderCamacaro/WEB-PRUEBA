@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import { ChevronRightIcon } from './icons';
-import imgEstructuras from '../assets/images/courses/curso-estructuras.png';
-import imgBases from '../assets/images/courses/bases-del-ingles.png';
-import imgIa from '../assets/images/courses/curso-ia.png';
-import imgDet from '../assets/images/courses/curso-det.png';
-import imgNegocios from '../assets/images/courses/ingles-para-negocios.png';
-import imgViajes from '../assets/images/courses/ingles-para-viajes.png';
+import imgEstructuras from '../assets/images/courses/curso-estructuras.webp';
+import imgBases from '../assets/images/courses/bases-del-ingles.webp';
+import imgIa from '../assets/images/courses/curso-ia.webp';
+import imgDet from '../assets/images/courses/curso-det.webp';
+import imgNegocios from '../assets/images/courses/ingles-para-negocios.webp';
+import imgViajes from '../assets/images/courses/ingles-para-viajes.webp';
 
 function PriceRibbon({ price }) {
   return (
