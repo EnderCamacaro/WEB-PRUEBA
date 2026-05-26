@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { PlayIcon, ChevronDownIcon } from './icons';
 import { heroVideo } from '../config/videos';
 
@@ -45,30 +45,30 @@ function HeroVideo({ src, poster }) {
   );
 }
 
-const particles = Array.from({ length: 14 }, () => ({
+const particles = Array.from({ length: 6 }, () => ({
   width: `${Math.random() * 5 + 3}px`, height: `${Math.random() * 5 + 3}px`,
   left: `${Math.random() * 100}%`, animationDuration: `${Math.random() * 12 + 10}s`, animationDelay: `${Math.random() * 10}s`,
 }));
 
 export default function Hero() {
   const sectionRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
 
-  const blob1Y = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const blob2Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const blob3Y = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const blob4Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const noParallax = prefersReducedMotion ? 0 : undefined;
+  const blob1Y = useTransform(scrollYProgress, [0, 1], noParallax ? [0, 0] : [0, 80]);
+  const blob2Y = useTransform(scrollYProgress, [0, 1], noParallax ? [0, 0] : [0, -60]);
+  const blob3Y = useTransform(scrollYProgress, [0, 1], noParallax ? [0, 0] : [0, 100]);
 
   return (
     <section ref={sectionRef} id="inicio" className="relative min-h-screen overflow-hidden grid-bg pt-32 sm:pt-40 pb-16 sm:pb-20" style={{ background: 'linear-gradient(160deg, #0A0A0F 0%, #050812 20%, #0D0820 50%, #050810 80%, #0A0A0F 100%)' }}>
-      <motion.div className="absolute top-[-10%] right-[-10%] w-[700px] h-[700px] rounded-full pointer-events-none" style={{ y: blob1Y, background: 'radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)', filter: 'blur(90px)' }} />
-      <motion.div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full pointer-events-none" style={{ y: blob2Y, background: 'radial-gradient(circle, rgba(147,51,234,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-      <motion.div className="absolute top-[40%] left-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style={{ y: blob3Y, background: 'radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)', filter: 'blur(70px)' }} />
-      <motion.div className="absolute top-[20%] right-[-5%] w-[350px] h-[350px] rounded-full pointer-events-none" style={{ y: blob4Y, background: 'radial-gradient(circle, rgba(236,72,153,0.05) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+      <motion.div className="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ y: blob1Y, background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)', filter: 'blur(40px)', willChange: 'transform' }} />
+      <motion.div className="absolute bottom-[-5%] left-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style={{ y: blob2Y, background: 'radial-gradient(circle, rgba(147,51,234,0.07) 0%, transparent 70%)', filter: 'blur(35px)', willChange: 'transform' }} />
+      <motion.div className="absolute top-[30%] right-[-3%] w-[300px] h-[300px] rounded-full pointer-events-none" style={{ y: blob3Y, background: 'radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%)', filter: 'blur(30px)', willChange: 'transform' }} />
       <div className="particles-bg">{particles.map((p, i) => <Particle key={i} style={p} />)}</div>
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-blue-500/30 text-xs sm:text-sm font-medium text-blue-300 mt-4 sm:mt-8 glass" style={{ backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-blue-500/30 text-xs sm:text-sm font-medium text-blue-300 mt-4 sm:mt-8 glass">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
@@ -98,16 +98,16 @@ export default function Hero() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.35, ease: [0.25,0.46,0.45,0.94] }}
-          className="w-full max-w-3xl rounded-2xl p-[1px] overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(147,51,234,0.15), transparent)', boxShadow: '0 0 60px rgba(59,130,246,0.15), 0 20px 60px rgba(0,0,0,0.5)' }}>
-          <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(10,10,15,0.6)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+          className="w-full max-w-3xl rounded-2xl p-[1px] overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(147,51,234,0.15), transparent)', boxShadow: '0 0 40px rgba(59,130,246,0.1)' }}>
+          <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(10,10,15,0.5)' }}>
             <HeroVideo src={heroVideo.src} poster={heroVideo.poster} />
           </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
-          className="grid grid-cols-3 gap-6 w-full max-w-xl mx-auto">
+          className="grid grid-cols-3 gap-4 w-full max-w-xl mx-auto">
           {[{ v: '+1.200', l: 'Estudiantes' }, { v: '4.9★', l: 'Calificación' }, { v: '92%', l: 'Aprobación DET' }].map((s) => (
-            <div key={s.l} className="flex flex-col items-center p-4 rounded-xl border border-white/5" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}>
+            <div key={s.l} className="flex flex-col items-center p-3 rounded-xl border border-white/5" style={{ background: 'rgba(255,255,255,0.03)' }}>
               <span className="text-2xl sm:text-3xl font-black gradient-text">{s.v}</span>
               <span className="text-xs sm:text-sm text-slate-500 mt-1">{s.l}</span>
             </div>
