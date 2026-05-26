@@ -84,7 +84,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-3 flex-shrink-0">
-              <button onClick={() => nav('#cursos')} className="hidden md:inline-flex bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold px-5 py-2 rounded-xl text-sm transition-all shadow-[0_4px_15px_rgba(37,99,235,0.4)] hover:shadow-[0_6px_25px_rgba(37,99,235,0.5)] hover:scale-105 active:scale-95">Entrar</button>
+              <button onClick={() => nav('#cursos')} className="hidden md:inline-flex bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-bold px-6 py-2.5 rounded-xl text-sm tracking-wide transition-all duration-200 shadow-[0_4px_20px_rgba(37,99,235,0.5)] hover:shadow-[0_8px_30px_rgba(37,99,235,0.6)] hover:scale-105 active:scale-95 border border-blue-400/20">Entrar</button>
               <button className="md:hidden p-2 rounded-xl bg-slate-800/80 text-blue-400 active:scale-90 transition-transform" onClick={() => setOpen(!open)}>
                 {open ? <XIcon size={22} /> : <MenuIcon size={22} />}
               </button>
@@ -100,7 +100,7 @@ export default function Navbar() {
               active === l.label ? 'text-blue-400 bg-blue-500/10 shadow-[0_0_12px_rgba(59,130,246,0.1)]' : 'text-slate-400 hover:text-white hover:bg-white/[0.03]'
             }`}>{l.label}</button>
         ))}
-        <button onClick={() => nav('#cursos')} className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold py-3.5 rounded-xl text-base mt-2 shadow-[0_4px_20px_rgba(37,99,235,0.4)]">Entrar</button>
+        <button onClick={() => nav('#cursos')} className="bg-gradient-to-br from-blue-500 to-blue-600 text-white font-bold py-4 rounded-xl text-base mt-2 shadow-[0_4px_20px_rgba(37,99,235,0.5)] border border-blue-400/20">Entrar</button>
       </div>
 
       <style>{`@keyframes navEnter{from{transform:translateY(-80px);opacity:0}to{transform:translateY(0);opacity:1}}`}</style>
