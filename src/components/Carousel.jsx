@@ -68,8 +68,13 @@ function Card({ video, active }) {
 
 export default function Carousel() {
   const [idx, setIdx] = useState(0);
+  const dirRef = useRef(1);
   const total = testimonialVideos.length;
-  const goTo = useCallback((i) => setIdx(Math.max(0, Math.min(i, total - 1))), [total]);
+  const goTo = useCallback((i) => {
+    const nextIdx = Math.max(0, Math.min(i, total - 1));
+    dirRef.current = nextIdx > idx ? 1 : -1;
+    setIdx(nextIdx);
+  }, [idx, total]);
   const prev = useCallback(() => goTo(idx - 1), [idx, goTo]);
   const next = useCallback(() => goTo(idx + 1), [idx, goTo]);
 
@@ -84,14 +89,12 @@ export default function Carousel() {
     const h = (e) => { if (e.key === 'ArrowLeft') prev(); if (e.key === 'ArrowRight') next(); };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [idx, prev, next]);
+  }, [prev, next]);
 
-  const tween = { type: 'tween', duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] };
+  const tween = { duration: 0.2, ease: 'easeOut' };
 
   return (
     <section id="testimonios" className="relative py-16 sm:py-20 lg:py-24 overflow-hidden" style={{ background: 'linear-gradient(160deg, #0A0A0F 0%, #100A1A 25%, #0A0812 55%, #08080F 80%, #0A0A0F 100%)' }}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(147,51,234,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
-      <div className="absolute top-0 left-0 w-[300px] h-[300px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)', filter: 'blur(35px)' }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
@@ -100,31 +103,19 @@ export default function Carousel() {
           <p className="section-subtitle mt-4 max-w-xl mx-auto">Escucha directamente de quienes ya transformaron su vida con el metodo de Omar.</p>
         </motion.div>
 
-        <div className="relative flex items-center justify-center select-none mx-auto" style={{ minHeight: '540px', touchAction: 'pan-y' }} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        <div className="relative flex items-center justify-center select-none mx-auto" style={{ touchAction: 'pan-y' }} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
           <div className="relative" style={{ width: '280px', height: '540px' }}>
-            <AnimatePresence>
-              {testimonialVideos.map((video, i) => {
-                const offset = i - idx;
-                if (Math.abs(offset) > 1) return null;
-
-                const isActive = offset === 0;
-                const x = offset * 180;
-                const y = isActive ? 0 : 4;
-                const scale = isActive ? 1 : 0.88;
-
-                return (
-                  <motion.div
-                    key={video.id}
-                    style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '280px', willChange: 'transform' }}
-                    initial={false}
-                    animate={{ x, y, scale, opacity: isActive ? 1 : 0.85, zIndex: isActive ? 10 : 0 }}
-                    exit={{ scale: 0.5, opacity: 0, zIndex: 0 }}
-                    transition={tween}
-                  >
-                    <Card video={video} active={isActive} />
-                  </motion.div>
-                );
-              })}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testimonialVideos[idx].id}
+                style={{ position: 'absolute', inset: 0, width: '280px' }}
+                initial={{ x: dirRef.current * 300, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: dirRef.current * -300, opacity: 0 }}
+                transition={tween}
+              >
+                <Card video={testimonialVideos[idx]} active={true} />
+              </motion.div>
             </AnimatePresence>
           </div>
 
