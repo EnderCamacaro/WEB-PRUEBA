@@ -1,4 +1,5 @@
-import { INSTAGRAM_URL, YOUTUBE_URL } from '../config/videos';
+import { INSTAGRAM_URL, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../config/videos';
+import { MessageCircleIcon } from './icons';
 
 function Svg({ size, children, viewBox = "0 0 24 24" }) {
   return <svg width={size} height={size} viewBox={viewBox} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{children}</svg>;
@@ -33,7 +34,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               {[
                 { icon: <Svg size={20}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></Svg>, href: INSTAGRAM_URL, label: 'Instagram' },
-                { icon: <Svg size={20}><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></Svg>, href: YOUTUBE_URL, label: 'YouTube' },
+                { icon: <span className="text-blue-400"><MessageCircleIcon size={20} /></span>, href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, label: 'WhatsApp' },
               ].map((s) => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
                   className="w-10 h-10 rounded-xl border border-blue-500/20 bg-slate-800/50 flex items-center justify-center text-slate-400 transition-all duration-300 hover:text-blue-400 hover:bg-blue-900/30 hover:scale-[1.15] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] active:scale-[0.92]">

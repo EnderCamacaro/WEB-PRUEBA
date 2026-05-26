@@ -8,17 +8,17 @@ const links = [
 ];
 
 function getActiveLink() {
-  const scrollY = window.scrollY + 80;
-  const sections = links.map(l => {
-    const el = document.querySelector(l.href);
-    if (!el) return { ...l, offset: Infinity };
-    return { ...l, offset: el.offsetTop };
-  });
-  let active = sections[0]?.label || '';
-  for (const s of sections) {
-    if (scrollY >= s.offset) active = s.label;
+  const scrollY = window.scrollY + 100;
+  const els = links.map(l => document.querySelector(l.href));
+  for (let i = links.length - 1; i >= 0; i--) {
+    const el = els[i];
+    if (!el) continue;
+    const next = i < links.length - 1 ? els[i + 1] : null;
+    const top = el.offsetTop;
+    const bottom = next ? next.offsetTop : document.documentElement.scrollHeight;
+    if (scrollY >= top && scrollY < bottom) return links[i].label;
   }
-  return active;
+  return links[0]?.label || '';
 }
 
 export default function Navbar() {
