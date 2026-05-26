@@ -27,7 +27,7 @@ function Card({ video, active }) {
         width: '280px',
         aspectRatio: '9/16',
         maxHeight: '540px',
-        background: 'linear-gradient(180deg, #0F0F1A 0%, #1A0A2E 100%)',
+        background: '#0F0F1A',
         boxShadow: active ? '0 0 30px rgba(59,130,246,0.25), 0 10px 40px rgba(0,0,0,0.5)' : '0 8px 20px rgba(0,0,0,0.4)',
       }}
     >
@@ -86,7 +86,7 @@ export default function Carousel() {
     return () => window.removeEventListener('keydown', h);
   }, [prev, next]);
 
-  const tween = { type: 'tween', duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] };
+  const tween = { type: 'tween', duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] };
 
   return (
     <section id="testimonios" className="relative py-16 sm:py-20 lg:py-24 overflow-hidden" style={{ background: 'linear-gradient(160deg, #0A0A0F 0%, #100A1A 25%, #0A0812 55%, #08080F 80%, #0A0A0F 100%)' }}>
@@ -116,8 +116,8 @@ export default function Carousel() {
                     key={video.id}
                     style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '280px' }}
                     initial={false}
-                    animate={{ x, scale, zIndex: isActive ? 10 : 0 }}
-                    exit={{ scale: 0.5, zIndex: 0 }}
+                    animate={{ x, scale, zIndex: 10 - Math.abs(offset) }}
+                    exit={{ x: offset * 180, scale: 0.5, zIndex: 0 }}
                     transition={tween}
                   >
                     <Card video={video} active={isActive} />
