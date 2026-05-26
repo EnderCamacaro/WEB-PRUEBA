@@ -28,7 +28,7 @@ function Card({ video, active }) {
         aspectRatio: '9/16',
         maxHeight: '540px',
         background: 'linear-gradient(180deg, #0F0F1A 0%, #1A0A2E 100%)',
-        boxShadow: active ? '0 0 50px rgba(59,130,246,0.3), 0 20px 60px rgba(0,0,0,0.6)' : '0 10px 30px rgba(0,0,0,0.4)',
+        boxShadow: active ? '0 0 30px rgba(59,130,246,0.25), 0 10px 40px rgba(0,0,0,0.5)' : '0 8px 20px rgba(0,0,0,0.4)',
       }}
     >
       <div className="relative w-full h-full">
@@ -86,12 +86,12 @@ export default function Carousel() {
     return () => window.removeEventListener('keydown', h);
   }, [idx, prev, next]);
 
-  const spring = { type: 'spring', stiffness: 220, damping: 26, mass: 0.7 };
+  const tween = { type: 'tween', duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] };
 
   return (
     <section id="testimonios" className="relative py-16 sm:py-20 lg:py-24 overflow-hidden" style={{ background: 'linear-gradient(160deg, #0A0A0F 0%, #100A1A 25%, #0A0812 55%, #08080F 80%, #0A0A0F 100%)' }}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(147,51,234,0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)', filter: 'blur(50px)' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(147,51,234,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+      <div className="absolute top-0 left-0 w-[300px] h-[300px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)', filter: 'blur(35px)' }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
@@ -100,9 +100,9 @@ export default function Carousel() {
           <p className="section-subtitle mt-4 max-w-xl mx-auto">Escucha directamente de quienes ya transformaron su vida con el metodo de Omar.</p>
         </motion.div>
 
-        <div className="relative flex items-center justify-center select-none mx-auto" style={{ minHeight: '540px', perspective: '1200px' }} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        <div className="relative flex items-center justify-center select-none mx-auto" style={{ minHeight: '540px' }} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
           <div className="relative" style={{ width: '280px', height: '540px' }}>
-            <AnimatePresence>
+            <AnimatePresence mode="popLayout">
               {testimonialVideos.map((video, i) => {
                 const offset = i - idx;
                 if (Math.abs(offset) > 1) return null;
@@ -111,17 +111,15 @@ export default function Carousel() {
                 const x = offset * 180;
                 const y = isActive ? 0 : 4;
                 const scale = isActive ? 1 : 0.88;
-                const opacity = isActive ? 1 : 0.6;
 
                 return (
                   <motion.div
                     key={video.id}
-                    layout
-                    style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '280px' }}
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '280px', willChange: 'transform' }}
                     initial={false}
-                    animate={{ x, y, scale, opacity, zIndex: 10 - Math.abs(offset) }}
-                    exit={{ scale: 0.5, opacity: 0, y: -30 }}
-                    transition={spring}
+                    animate={{ x, y, scale, opacity: isActive ? 1 : 0.6 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                    transition={tween}
                   >
                     <Card video={video} active={isActive} />
                   </motion.div>
@@ -131,12 +129,12 @@ export default function Carousel() {
           </div>
 
           <button onClick={prev} disabled={idx === 0}
-            className="absolute left-0 z-20 w-11 h-11 rounded-full glass neon-border flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 hover:scale-110 active:scale-90 -translate-x-2 sm:-translate-x-8"
+            className="absolute left-0 z-20 w-11 h-11 rounded-full glass neon-border flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-transform duration-200 hover:scale-110 active:scale-90 -translate-x-2 sm:-translate-x-8"
             aria-label="Anterior">
             <ChevronLeftIcon size={20} />
           </button>
           <button onClick={next} disabled={idx === total - 1}
-            className="absolute right-0 z-20 w-11 h-11 rounded-full glass neon-border flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 hover:scale-110 active:scale-90 translate-x-2 sm:translate-x-8"
+            className="absolute right-0 z-20 w-11 h-11 rounded-full glass neon-border flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-transform duration-200 hover:scale-110 active:scale-90 translate-x-2 sm:translate-x-8"
             aria-label="Siguiente">
             <ChevronRightIcon size={20} />
           </button>
