@@ -74,11 +74,11 @@ function ChartCard() {
             <circle cx="150" cy="68" r="4" fill="#60A5FA" stroke="#0F0F1A" strokeWidth="1.5" filter="url(#glow)" />
             <circle cx="260" cy="24" r="4" fill="#8B5CF6" stroke="#0F0F1A" strokeWidth="1.5" filter="url(#glow)" />
 
-            <text x="60" y="127" fill="#64748B" fontSize="8" textAnchor="middle" fontFamily="Inter">Día 1</text>
+            <text x="60" y="127" fill="#64748B" fontSize="8" textAnchor="middle" fontFamily="Inter">Inicio</text>
             <text x="60" y="137" fill="#94A3B8" fontSize="7" textAnchor="middle" fontFamily="Inter" fontStyle="italic">Bloqueo mental</text>
-            <text x="150" y="83" fill="#64748B" fontSize="8" textAnchor="middle" fontFamily="Inter">Día 45</text>
+            <text x="150" y="83" fill="#64748B" fontSize="8" textAnchor="middle" fontFamily="Inter">Mitad</text>
             <text x="150" y="93" fill="#94A3B8" fontSize="7" textAnchor="middle" fontFamily="Inter" fontStyle="italic">Fluidez fluida</text>
-            <text x="260" y="15" fill="#64748B" fontSize="8" textAnchor="middle" fontFamily="Inter">Día 90</text>
+            <text x="260" y="15" fill="#64748B" fontSize="8" textAnchor="middle" fontFamily="Inter">Meta</text>
             <text x="260" y="6" fill="#94A3B8" fontSize="7" textAnchor="middle" fontFamily="Inter" fontStyle="italic">Negociando en inglés</text>
           </svg>
         </div>
@@ -157,7 +157,7 @@ export default function Hero() {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             <h1 className="section-title text-white leading-tight mt-5">
               Habla inglés con <span className="gradient-text neon-glow-text">confianza real</span><br className="sm:block hidden" />
-              en <span className="gradient-text-gold">90 días</span>, garantizado.
+              sin métodos aburridos.
             </h1>
             <p className="section-subtitle mt-5 max-w-xl">
               Olvida las reglas. Habla desde el día uno y transforma tu vida.
