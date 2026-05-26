@@ -164,14 +164,10 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="flex flex-col sm:flex-row items-center lg:items-start gap-4 mt-7">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="mt-7">
             <button onClick={() => { const el = document.querySelector('#cursos'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}
-              className="btn-primary px-10 py-4 rounded-2xl text-base sm:text-lg transition-transform duration-200 hover:scale-[1.06] active:scale-[0.96]">
+              className="btn-primary px-12 py-4 rounded-2xl text-base sm:text-lg transition-transform duration-200 hover:scale-[1.06] active:scale-[0.96]">
               ENTRAR AHORA
-            </button>
-            <button onClick={() => { const el = document.querySelector('#cursos'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}
-              className="btn-secondary px-8 py-4 rounded-2xl text-base sm:text-lg transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]">
-              Ver cursos
             </button>
           </motion.div>
         </div>
