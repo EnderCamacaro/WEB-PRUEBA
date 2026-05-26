@@ -138,7 +138,7 @@ export default function Hero() {
   const blob3Y = useTransform(scrollYProgress, [0, 1], noParallax ? [0, 0] : [0, 100]);
 
   return (
-    <section ref={sectionRef} id="inicio" className="relative min-h-screen overflow-hidden grid-bg pt-32 sm:pt-36 pb-16 sm:pb-20" style={{ background: 'linear-gradient(160deg, #0A0A0F 0%, #050812 20%, #0D0820 50%, #050810 80%, #0A0A0F 100%)' }}>
+    <section ref={sectionRef} id="inicio" className="relative min-h-screen overflow-hidden grid-bg pt-20 sm:pt-28 pb-12 sm:pb-20" style={{ background: 'linear-gradient(160deg, #0A0A0F 0%, #050812 20%, #0D0820 50%, #050810 80%, #0A0A0F 100%)' }}>
       <motion.div className="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ y: blob1Y, background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)', filter: 'blur(40px)', willChange: 'transform' }} />
       <motion.div className="absolute bottom-[-5%] left-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style={{ y: blob2Y, background: 'radial-gradient(circle, rgba(147,51,234,0.07) 0%, transparent 70%)', filter: 'blur(35px)', willChange: 'transform' }} />
       <motion.div className="absolute top-[30%] right-[-3%] w-[300px] h-[300px] rounded-full pointer-events-none" style={{ y: blob3Y, background: 'radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%)', filter: 'blur(30px)', willChange: 'transform' }} />
@@ -154,9 +154,9 @@ export default function Hero() {
             Clases online · Metodología probada · Resultados reales
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="-mt-2 sm:mt-0">
             <h1 className="section-title text-white leading-tight mt-5">
-              Habla inglés con <span className="gradient-text neon-glow-text">confianza real</span><br className="sm:block hidden" />
+              Habla inglés con <span className="gradient-text neon-glow-text">confianza real</span> <br className="sm:block hidden" />
               sin métodos aburridos.
             </h1>
             <p className="section-subtitle mt-5 max-w-xl">
@@ -176,14 +176,14 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <div className="lg:w-2/5 mt-14 lg:mt-0">
+        <div className="lg:w-2/5 mt-8 lg:mt-0">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.3, ease: [0.25,0.46,0.45,0.94] }} className="relative">
             <ChartCard />
             <AudioCard />
           </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.6 }}
-            className="grid grid-cols-3 gap-3 mt-6 lg:mt-8 max-w-sm mx-auto lg:mx-0">
+            className="grid grid-cols-3 gap-2 mt-4 lg:mt-6 max-w-sm mx-auto lg:mx-0">
             {[{ v: '+1.200', l: 'Estudiantes' }, { v: '4.9★', l: 'Calificación' }, { v: '92%', l: 'Aprobación DET' }].map((s) => (
               <div key={s.l} className="flex flex-col items-center p-2.5 rounded-xl border border-white/5" style={{ background: 'rgba(255,255,255,0.03)' }}>
                 <span className="text-lg sm:text-xl font-black gradient-text">{s.v}</span>
